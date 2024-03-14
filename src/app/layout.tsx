@@ -8,7 +8,7 @@ import Providers from "@/components/Providers";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "SPOTs on the MAP",
+  title: "spots on the MAP",
   description: "Find your favorite SPOTs",
 };
 

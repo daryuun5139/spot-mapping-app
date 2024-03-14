@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## <u>spot-mapping-app</u>
 
-## Getting Started
+##### <概要>
 
-First, run the development server:
+お気に入りのスポットを地図上に表示するサイトです。
+Googleマップのようなサイトを作ってみたいと思い作成しました。
+マップの表示にはコストの観点からMapboxを採用しました。
+URL: https://spot-mapping-app.vercel.app/
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+<img src="public/readme/spot-mapping-app.png" alt="spot-mapping-app" title="spot-mapping-app" width="400" height="300"><img src="public/readme/spot-mapping-app-sp.png" alt="spot-mapping-app-sp" title="spot-mapping-app-sp" width="250" height="300">
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+##### <製作日>
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+2023年12月（制作期間：約2週間）
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+##### <仕様>
 
-## Learn More
+サイトの仕組みは以下の流れになっています。
 
-To learn more about Next.js, take a look at the following resources:
+- 上部のカテゴリータブを選択する。
+- ページ左側にスポット一覧が表示される。
+- スポット一覧から任意のスポットを選択すると、地図上にポップアップが表示される。
+（地図上のマーカーを選択してもポップアップは表示されます）
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<mapAPIの選択について>
+MapboxかGoogleマップの選択肢がありましたが、アクセス数の増加で料金が発生することのないMapboxにしました。
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+<Mapboxライブラリの選択について>
+選択肢としてreact-mapbox-glとmapbox-glがありました。
+reactの方が扱いやすいだろうとreact-mapbox-glを選択しましたが、情報が少なく扱いづらかったので途中でmapbox-glに切り替えました。ライブラリの事前選定の大事さが身にしみました。
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+##### <使用技術>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Next.js13(app router), recoil, tailwind, shadcn, typescript, etc
+
+##### <参考URL>
+
+<Mapbox初期表示>
+
+- [Use Mapbox GL JS in a React app(Mapbox Tutrial)](https://docs.mapbox.com/help/tutorials/use-mapbox-gl-js-with-react/)
+- [【React/mapboxの地図上で3D モデルを動かす】(2) mapboxの地図上に3Dモデルを表示する](https://qiita.com/itouoti/items/90550c8d529d63596d96)
+
+
+<Mapbox(フルスクリーン、スケール、ナビゲーションControl、日本語化の追加)>
+
+- [Markers and controls](https://docs.mapbox.com/mapbox-gl-js/api/markers/)
+- [mapbox-gl-language](https://github.com/mapbox/mapbox-gl-language)
+
+<Popupの表示>
+
+- [Display a popup on click](https://docs.mapbox.com/mapbox-gl-js/example/popup-on-click/)
+- [Display a popup on hover](https://docs.mapbox.com/mapbox-gl-js/example/popup-on-hover/)
+- [can't access 'coordinates' member of geojson feature collection](https://stackoverflow.com/questions/55621480/cant-access-coordinates-member-of-geojson-feature-collection)
