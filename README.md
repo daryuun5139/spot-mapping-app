@@ -22,10 +22,10 @@ URL: https://spot-mapping-app.vercel.app/
 - スポット一覧から任意のスポットを選択すると、地図上にポップアップが表示される。
 （地図上のマーカーを選択してもポップアップは表示されます）
 
-<mapAPIの選択について>
+<mapAPIの選択について>  
 MapboxかGoogleマップの選択肢がありましたが、アクセス数の増加で料金が発生することのないMapboxにしました。
 
-<Mapboxライブラリの選択について>
+<Mapboxライブラリの選択について>  
 選択肢としてreact-mapbox-glとmapbox-glがありました。
 reactの方が扱いやすいだろうとreact-mapbox-glを選択しましたが、情報が少なく扱いづらかったので途中でmapbox-glに切り替えました。ライブラリの事前選定の大事さが身にしみました。
 
