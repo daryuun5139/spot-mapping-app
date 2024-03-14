@@ -7,12 +7,34 @@ import MapboxLanguage from "@mapbox/mapbox-gl-language";
 import { GeojsonDataType, GeojsonGroupType, RawDataType } from "@/types/spotinfo";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { cardClicked } from "@/lib/atoms/card-clicked";
+import { categoryState } from "@/lib/atoms/category-state";
+import "../../style/mapping.css";
 
 type Props = {
   geojsonData: GeojsonDataType[];
 };
 
 const MapArea = ({ geojsonData }: Props) => {
+  const categoryInfo = useRecoilValue<string>(categoryState);
+  const dataFilter = (geojsonData: GeojsonDataType[]) => {
+    let list: GeojsonDataType[] = [];
+    if (categoryInfo === "すべて") {
+      return {
+        data: geojsonData,
+      };
+    }
+    geojsonData.map((item: GeojsonDataType) => {
+      if (item.properties.category[0] === categoryInfo) {
+        list.push(item);
+      }
+    });
+    return {
+      data: list,
+    };
+  };
+
+  const { data } = dataFilter(geojsonData);
+
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
   const language = new MapboxLanguage({
@@ -22,7 +44,7 @@ const MapArea = ({ geojsonData }: Props) => {
     type: "geojson",
     data: {
       type: "FeatureCollection",
-      features: geojsonData,
+      features: data,
     },
   };
   const [clickedCardId, setClickedCardId] = useRecoilState(cardClicked);
@@ -54,7 +76,7 @@ const MapArea = ({ geojsonData }: Props) => {
       accessToken: process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN,
       style: "mapbox://styles/mapbox/streets-v12",
       center: [139.7527, 35.6851],
-      zoom: 12,
+      zoom: 9,
     });
 
     map.current.on("render", () => {
@@ -68,7 +90,7 @@ const MapArea = ({ geojsonData }: Props) => {
     map.current.addControl(new mapboxgl.NavigationControl(), "bottom-right");
     map.current.addControl(language);
 
-    map.current.on("load", () => {
+    map.current!.on("load", () => {
       if (map.current) {
         map.current.addSource("places", markerData);
 

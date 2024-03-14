@@ -10,7 +10,7 @@ export type RawDataType = {
   properties: {
     fieldId?: "properties";
     name: string;
-    category: string[];
+    category: string;
     address: string;
     hours: string;
     tell: string;
@@ -37,7 +37,7 @@ export type selectedDataType = {
   properties: {
     fieldId?: "properties";
     name: string;
-    category: string[];
+    category: string;
     address: string;
     hours: string;
     tell: string;
@@ -56,7 +56,7 @@ export type GeojsonDataType = {
   type: "Feature";
   properties: {
     name: string;
-    category: string[];
+    category: string;
     address: string;
     hours: string;
     tell: string;

@@ -15,10 +15,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={cn(inter.className, "min-h-screen pt-16 antialiased")}>
+      <body className={cn(inter.className, "flex h-screen flex-col")}>
         <Providers>
           <Header />
-          {children}/
+          {children}
         </Providers>
       </body>
     </html>
