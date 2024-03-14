@@ -19,23 +19,20 @@ const CardScrollHorizontal = ({ geojsonData }: Props) => {
     setCardInfo(e.currentTarget.id);
   };
 
-  const dataFilter = (geojsonData: GeojsonDataType[]) => {
+  const dataFilter = (geojsonData: GeojsonDataType[]): GeojsonDataType[] => {
     let list: GeojsonDataType[] = [];
     if (categoryInfo === "すべて") {
-      return {
-        data: geojsonData,
-      };
+      return geojsonData;
     }
     geojsonData.map((item: GeojsonDataType) => {
       if (item.properties.category[0] === categoryInfo) {
         list.push(item);
       }
     });
-    return {
-      data: list,
-    };
+    return list;
   };
-  const { data } = dataFilter(geojsonData);
+
+  const data: GeojsonDataType[] = dataFilter(geojsonData);
 
   return (
     <div className="flex w-full px-3 py-2 lg:hidden">
@@ -43,7 +40,7 @@ const CardScrollHorizontal = ({ geojsonData }: Props) => {
         <ScrollArea>
           <ScrollBar orientation="horizontal" />
           <div className="flex gap-3">
-            {geojsonData.map((item) => (
+            {data.map((item) => (
               <Card
                 className="h-52 w-60 cursor-pointer duration-200 hover:opacity-50"
                 key={item.id}

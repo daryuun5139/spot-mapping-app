@@ -4,6 +4,7 @@ import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 import { Badge } from "../ui/badge";
 import { useRecoilState } from "recoil";
 import { categoryState } from "@/lib/atoms/category-state";
+import { ChangeEvent, useEffect } from "react";
 
 type Props = {};
 
@@ -23,9 +24,8 @@ const categoryList = [
 
 const CategoryScrollBar = (props: Props) => {
   const [categoryInfo, setCategoryInfo] = useRecoilState<string>(categoryState);
-  const onClick = (e: React.MouseEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    setCategoryInfo(e.currentTarget.innerHTML);
+  const onClick = (e: ChangeEvent<HTMLInputElement>) => {
+    setCategoryInfo(e.currentTarget.value);
   };
 
   return (
@@ -33,13 +33,22 @@ const CategoryScrollBar = (props: Props) => {
       <ScrollBar orientation="horizontal" />
       <div className="flex items-center gap-2">
         {categoryList.map((item) => (
-          <Badge
-            key={categoryList.indexOf(item)}
-            onClick={onClick}
-            className="w-fit cursor-pointer border-[1px] border-black bg-white px-3 py-1 text-black hover:bg-white hover:opacity-50"
-          >
-            {item}
-          </Badge>
+          <div key={item} className="py-1">
+            <input
+              type="radio"
+              id={item}
+              className="peer hidden"
+              name="categoryOption"
+              value={item}
+              onChange={onClick}
+            />
+            <label
+              htmlFor={item}
+              className="w-fit cursor-pointer rounded-xl border-[1px] border-black bg-white px-3 py-1 text-sm text-black hover:opacity-50 peer-checked:bg-slate-200"
+            >
+              {item}
+            </label>
+          </div>
         ))}
       </div>
     </ScrollArea>
